@@ -32,7 +32,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //implementation fileTree(dir: "libs", include: ["*.jar"])
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     // to-do Add the dependencies for Firebase products you want to use

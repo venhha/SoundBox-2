@@ -1,4 +1,4 @@
-package com.soundbox.network;
+package com.soundbox.common;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

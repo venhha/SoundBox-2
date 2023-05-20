@@ -1,4 +1,4 @@
-package com.soundbox.network;
+package com.soundbox.common;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

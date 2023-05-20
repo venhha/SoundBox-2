@@ -11,8 +11,10 @@ public class SharedPreferenceManager {
     private static SharedPreferenceManager mInstance;
     private static Context ctx;
 
-    //test
-    private static final String _NAME = "testSharedPreference";
+    // single pattern
+    SharedPreferences mSharedPreferences;
+
+    // Constants
     private static final String PREF_LOGIN = "loginPref";
 
     private SharedPreferenceManager(Context context) {
@@ -30,29 +32,31 @@ public class SharedPreferenceManager {
 
     // save user info for the next login --without type email pass
     public void saveUserInfo(String email, String password) {
-        SharedPreferences.Editor editor = getSharedPreferences(PREF_LOGIN).edit();
+        SharedPreferences.Editor editor = getSharedPreferences_LOGIN().edit();
         editor.putString("email", email);
         editor.putString("password", password);
         editor.apply();
-        System.out.println("saveUserInfo SUCCESS");
     }
 
     public User getUserInfo() {
-        String email = getSharedPreferences(PREF_LOGIN).getString("email", null);
-        String password = getSharedPreferences(PREF_LOGIN).getString("password", null);
+        String email = getSharedPreferences_LOGIN().getString("email", null);
+        String password = getSharedPreferences_LOGIN().getString("password", null);
         return new User(email, password);
     }
 
     public boolean isLoggedIn() {
-        return getSharedPreferences(PREF_LOGIN).getString("email", null) != null;
+        return getSharedPreferences_LOGIN().getString("email", null) != null;
     }
 
     public void logOut() {
-        getSharedPreferences(PREF_LOGIN).edit().clear().apply();
-        System.out.println("logOut SUCCESS");
+        getSharedPreferences_LOGIN().edit().clear().apply();
     }
 
-    private SharedPreferences getSharedPreferences(String prefName) {
-        return ctx.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+    private SharedPreferences getSharedPreferences_LOGIN() {
+        if (mSharedPreferences == null) {
+            mSharedPreferences = ctx.getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
+            return mSharedPreferences;
+        }
+        return mSharedPreferences;
     }
 }

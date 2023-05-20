@@ -54,11 +54,11 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.soundbox.R;
-import com.soundbox.adapter.ListAdapter;
+import com.soundbox.adapter.ListSongAdapter;
 import com.soundbox.common.SharedPreferenceManager;
 import com.soundbox.model.Song;
 import com.soundbox.model.User;
-import com.soundbox.network.MyService;
+import com.soundbox.common.MyService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     List<String> songsUrlList;
     List<String> songsArtistList;
     List<String> songsDurationList;
-    ListAdapter adapter;
+    ListSongAdapter adapter;
     List<String> thumbnail;
     private Song newMusic;
     private boolean isPlaying;
@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
 
                     jcAudios.add(JcAudio.createFromURL(song.getSongName(), song.getSongUrl()));
                 }
-                adapter = new ListAdapter(getApplicationContext(), songsNameList, thumbnail, songsArtistList, songsDurationList, songsUrlList);
+                adapter = new ListSongAdapter(getApplicationContext(), songsNameList, thumbnail, songsArtistList, songsDurationList, songsUrlList);
 
 
                 jcPlayerView.initPlaylist(jcAudios, null);

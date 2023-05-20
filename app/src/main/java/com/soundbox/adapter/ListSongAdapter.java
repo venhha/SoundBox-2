@@ -25,7 +25,7 @@ import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
-public class ListAdapter extends BaseAdapter {
+public class ListSongAdapter extends BaseAdapter {
     List<String> songNames;
     List<String> thumbnails;
     List<String> songArtist;
@@ -35,7 +35,7 @@ public class ListAdapter extends BaseAdapter {
     FirebaseStorage storage;
     List<String> songsUrlList;
 
-    public ListAdapter(Context context, List<String> songNames, List<String> thumbnails, List<String> songArtist, List<String> songDuration, List<String> songUrl) {
+    public ListSongAdapter(Context context, List<String> songNames, List<String> thumbnails, List<String> songArtist, List<String> songDuration, List<String> songUrl) {
         this.context = context;
         this.songNames = songNames;
         this.thumbnails = thumbnails;
