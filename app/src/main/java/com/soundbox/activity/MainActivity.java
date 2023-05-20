@@ -148,11 +148,11 @@ public class MainActivity extends AppCompatActivity {
 
         clickTabLayout();
         Log.e(TAG, "clickTabLayout" );
-
         loadMusicOncreate();
         Log.e(TAG, "loadMusicOncreate" );
         clickMusicOncreate();
         Log.e(TAG, "clickMusicOncreate" );
+
         uploadOncreate();
         Log.e(TAG, "uploadOncreate" );
         loginOncreate();
@@ -228,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     @SuppressLint("ResourceAsColor")
-
     private void loadMusicOncreate() {
         auth = FirebaseAuth.getInstance();
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("send_data_to_activity"));

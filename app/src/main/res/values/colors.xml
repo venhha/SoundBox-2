@@ -10,4 +10,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_play_music">#424040</color>
     <color name="background_home_and_find">#090909</color>
+    <color name="bg_home">#FFEDDCC3</color>
 </resources>

@@ -3,124 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.UploadSongActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/songsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/songs_list_layout" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_layout"
-                android:text="Chọn nhạc từ thết bị"
-                android:textColor="#F6F6F4"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:id="@+id/linear_layout_edit_text_and_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
-
-                <EditText
-                    android:id="@+id/selectSong"
-                    android:layout_width="340dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/edit_text_layout"
-                    android:hint="Song file here"
-                    android:textColor="#FFFFFF"
-                    android:textSize="22dp" />
-
-                <ImageView
-                    android:id="@+id/selectSongButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:src="@drawable/icon_search"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_layout"
-                android:text="Mô tả"
-                android:textColor="#F6F6F4"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/artistNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_layout"
-                android:hint="Song name here"
-                android:textColor="#FFFFFF"
-                android:textSize="22dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_layout"
-                android:text="Hình ảnh của bài hát"
-                android:textColor="#F6F6F4"
-                android:textSize="24sp" />
-
-            <ImageView
-                android:id="@+id/selectImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_layout"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp" />
-
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/uploadSongButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/bold"
-            android:onClick="upload"
-            android:text="Tải lên"
-            android:textColor="#FFFFFF" />
-
-
-    </LinearLayout>
+    <com.example.jean.jcplayer.view.JcPlayerView
+        android:id="@+id/jcplayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/songsList"
+        android:background="@color/bg_home"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
@@ -153,6 +57,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/selected_bottom_navbar"
                     android:orientation="vertical">
 
                     <ImageView
@@ -179,7 +84,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/selected_bottom_navbar"
                     android:orientation="vertical">
 
                     <ImageView

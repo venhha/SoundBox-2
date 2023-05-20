@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             //save user info for the next login without type again
                             SharedPreferenceManager.getInstance(getApplicationContext()).saveUserInfo(email, password);
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             finish();
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công\n" + email, Toast.LENGTH_SHORT).show();
                         } else {
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             if (SharedPreferenceManager.getInstance(this).isLoggedIn()) {
                 finish();
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, HomeActivity.class));
                 Toast.makeText(getApplicationContext(), "Chào mừng trở lại " + "Ven", Toast.LENGTH_SHORT);
             }
         } catch (Exception exception) {

@@ -1,17 +1,14 @@
 package com.soundbox.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.soundbox.R;
-import com.soundbox.common.SharedPreferenceManager;
 
 public class IntroActivity extends AppCompatActivity {
 
