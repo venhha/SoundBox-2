@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "543851054244",
+    "firebase_url": "https://pm-project-4161f-default-rtdb.firebaseio.com",
+    "project_id": "pm-project-4161f",
+    "storage_bucket": "pm-project-4161f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543851054244:android:d44a12c7d4da4d536c5231",
+        "android_client_info": {
+          "package_name": "com.soundbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543851054244-uh8pi8erugoiri2t21mujml6das985rj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEtIQNDW69au1QjwnAT-oRRkT4Wp0qBEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543851054244-uh8pi8erugoiri2t21mujml6das985rj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543851054244:android:d0447ec3a59d15d96c5231",
+        "android_client_info": {
+          "package_name": "com.ven.myfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543851054244-uh8pi8erugoiri2t21mujml6das985rj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEtIQNDW69au1QjwnAT-oRRkT4Wp0qBEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543851054244-uh8pi8erugoiri2t21mujml6das985rj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#494747"
+    tools:context=".activity.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#323131"
+        android:layout_above="@+id/layout_button_tab"
+        android:visibility="visible"
+        android:layout_marginBottom="70dp">
+
+        <ListView
+            android:id="@+id/songsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_upload"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#323131"
+        android:layout_above="@+id/layout_button_tab"
+        android:visibility="gone"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select, Rename your song"
+                    android:textSize="16dp"
+                    android:background="@drawable/edit_text_layout"
+                    android:textColor="#F6F6F4" />
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_edit_text_and_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/selectSong"
+                        android:layout_width="340dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_layout"
+                        android:hint="Song file here"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22dp"/>
+                    <ImageButton
+                        android:id="@+id/selectSongButton"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/ic_baseline_library_music_24"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select, Rename your song"
+                    android:textSize="16dp"
+                    android:background="@drawable/edit_text_layout"
+                    android:textColor="#F6F6F4" />
+
+                <EditText
+                    android:id="@+id/artistNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_layout"
+                    android:hint="Song name here"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_layout"
+                    android:text="Select, Rename your song"
+                    android:textColor="#F6F6F4"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/selectImage"
+                    android:layout_width="350dp"
+                    android:paddingTop="10dp"
+                    android:layout_height="350dp"
+                    android:paddingStart="10dp"
+                    android:background="@drawable/edit_text_layout"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/uploadSongButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="upload"
+                android:fontFamily="@font/bold"
+                android:text="Upload"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="10dp"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#323131"
+        android:layout_above="@+id/layout_button_tab"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:background="@color/background_home_and_find"
+            android:id="@+id/layout_login"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="LOGIN"
+                android:textSize="25sp"
+                android:textColor="@color/background_play_music"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:padding="20dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:hint="Email"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:hint="Password"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <ProgressBar
+                android:id="@+id/processBar"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="50dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOGIN"/>
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REGISTER"
+                    android:layout_marginLeft="50dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_login_to_upload"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#323131"
+        android:layout_above="@+id/layout_button_tab"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click button User to login"
+            android:textColor="@color/white"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_logout_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#323131"
+        android:layout_above="@+id/layout_button_tab"
+        android:visibility="gone"
+        android:layout_marginBottom="70dp">
+
+        <LinearLayout
+            android:id="@+id/layout_user_true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_marginLeft="50dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="User:  "
+                    android:textColor="@color/white"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:id="@+id/textViewuser_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click button User to login"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Pass:  "
+                    android:textColor="@color/white"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/textView_pass_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Click button User to login"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <com.example.jean.jcplayer.view.JcPlayerView
+        android:id="@+id/jcplayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        android:layout_above="@+id/layout_button_tab"/>
+
+    <LinearLayout
+        android:id="@+id/layout_button_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+        <Button
+            android:id="@+id/button_tab_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:background="#534F4F"
+            android:textColor="#DA1717"
+            android:textSize="30dp"/>
+        <Button
+            android:id="@+id/button_tab_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:background="#534F4F"
+            android:textColor="#DAD8D8"
+            android:textSize="30dp"/>
+        <Button
+            android:id="@+id/button_tab_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:textColor="#CAC6C6"
+            android:background="#534F4F"
+            android:textSize="30dp"/>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
