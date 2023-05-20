@@ -6,7 +6,7 @@ Phần mềm nghe nhạc trên điện thoại android có các tính năng:
 
 # Đồ án Quản lý dự án phần mềm
 Thành viên:
-Hà Nhật Vềnh
-Nguyễn Viết Quuang
-Tăng Phúc Toàn
-Phạm Xuân Nguyên
+- Hà Nhật Vềnh
+- Nguyễn Viết Quang
+- Tăng Phúc Toàn
+- Phạm Xuân Nguyên
