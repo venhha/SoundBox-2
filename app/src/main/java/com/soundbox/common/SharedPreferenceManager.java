@@ -14,8 +14,9 @@ public class SharedPreferenceManager {
     // single pattern
     SharedPreferences mSharedPreferences;
 
-    // Constants
+    // Constants || Pref name
     private static final String PREF_LOGIN = "loginPref";
+    private static final String PREF_STATE_PLAYER = "state_playerPref";
 
     private SharedPreferenceManager(Context context) {
         ctx = context;
@@ -59,4 +60,5 @@ public class SharedPreferenceManager {
         }
         return mSharedPreferences;
     }
+
 }

@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.soundbox.R;
 import com.soundbox.common.MyUtils;
 import com.soundbox.common.SharedPreferenceManager;
+import com.soundbox.model.User;
 
 public class LoginActivity extends AppCompatActivity {
     EditText et_username, et_password;
@@ -32,13 +34,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        retrieveLogin(); // check login information
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title not the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//int flag, int mask
 
         setContentView(R.layout.activity_login);
         bindViews();
+        bindNavigationBar();
     }
 
     private void bindViews() {
@@ -53,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         tv_regHere.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            finish();
         });
     }
 
@@ -94,16 +97,28 @@ public class LoginActivity extends AppCompatActivity {
         );
 
     }
-    private void retrieveLogin() {
-        try {
-            if (SharedPreferenceManager.getInstance(this).isLoggedIn()) {
+    private LinearLayout btn_toHome, btn_toUpload, btn_toProfile;
+
+    private void bindNavigationBar() {
+        btn_toHome = findViewById(R.id.btn_toHome);
+        btn_toUpload = findViewById(R.id.btn_toUpload);
+        btn_toProfile = findViewById(R.id.btn_toProfile);
+
+        btn_toHome.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+        });
+
+        btn_toUpload.setOnClickListener(v -> {
+            if (SharedPreferenceManager.getInstance(getApplicationContext()).isLoggedIn()){
+                startActivity(new Intent(LoginActivity.this, UploadSongActivity.class));
                 finish();
-                startActivity(new Intent(this, HomeActivity.class));
-                Toast.makeText(getApplicationContext(), "Chào mừng trở lại " + "Ven", Toast.LENGTH_SHORT);
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT);
-        }
+            } else {
+                Toast.makeText(this, "Bạn cần đăng nhập để sử dụng chức năng này", Toast.LENGTH_SHORT).show();
+            }        });
+
+//        btn_toProfile.setOnClickListener(v -> {
+//            recreate();
+//        });
     }
 }

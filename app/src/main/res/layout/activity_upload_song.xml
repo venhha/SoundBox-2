@@ -9,6 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="25dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,31 +25,33 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_layout"
-                android:text="Chọn nhạc từ thết bị"
-                android:textColor="#F6F6F4"
-                android:textSize="24sp" />
+                android:text="Chọn nhạc từ thiết bị"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_edit_text_and_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:weightSum="10">
 
                 <EditText
                     android:id="@+id/selectSong"
-                    android:layout_width="340dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/edit_text_layout"
-                    android:hint="Song file here"
-                    android:textColor="#FFFFFF"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:hint="Sửa tên bài hát"
+                    android:textColor="#000"
                     android:textSize="22dp" />
 
                 <ImageView
                     android:id="@+id/selectSongButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:src="@drawable/icon_search"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -65,20 +69,19 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_layout"
                 android:text="Mô tả"
-                android:textColor="#F6F6F4"
-                android:textSize="24sp" />
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/artistNameEditText"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_layout"
-                android:hint="Song name here"
-                android:textColor="#FFFFFF"
-                android:textSize="22dp" />
+                android:hint="Nhập mô tả"
+                android:textColor="#000"
+                android:textSize="24sp" />
 
         </LinearLayout>
 
@@ -92,18 +95,19 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_layout"
                 android:text="Hình ảnh của bài hát"
-                android:textColor="#F6F6F4"
-                android:textSize="24sp" />
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/selectImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_layout"
                 android:paddingStart="10dp"
+                android:background="@drawable/stroke_black"
+                android:layout_gravity="center"
                 android:paddingTop="10dp" />
 
         </LinearLayout>
@@ -116,6 +120,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/bold"
             android:onClick="upload"
+            android:layout_gravity="center"
             android:text="Tải lên"
             android:textColor="#FFFFFF" />
 

@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_register);
         bindViews();
+        bindNavigationBar();
     }
 
     private void bindViews() {
@@ -51,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             handleRegister();
         });
         tv_loginHere.setOnClickListener(v -> {
+            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
             finish();
         });
     }
@@ -96,5 +99,31 @@ public class RegisterActivity extends AppCompatActivity {
                 }
         );
         //todo
+    }
+
+    private LinearLayout btn_toHome, btn_toUpload, btn_toProfile;
+
+    private void bindNavigationBar() {
+        btn_toHome = findViewById(R.id.btn_toHome);
+        btn_toUpload = findViewById(R.id.btn_toUpload);
+        btn_toProfile = findViewById(R.id.btn_toProfile);
+
+        btn_toHome.setOnClickListener(v -> {
+            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+            finish();
+        });
+
+        btn_toUpload.setOnClickListener(v -> {
+            if (SharedPreferenceManager.getInstance(getApplicationContext()).isLoggedIn()){
+                startActivity(new Intent(RegisterActivity.this, UploadSongActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Bạn cần đăng nhập để sử dụng chức năng này", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        btn_toProfile.setOnClickListener(v -> {
+//            recreate();
+//        });
     }
 }

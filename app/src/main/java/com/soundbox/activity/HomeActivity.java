@@ -6,8 +6,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -42,20 +44,14 @@ import com.google.firebase.storage.StorageReference;
 import com.soundbox.R;
 import com.soundbox.adapter.ListSongAdapter;
 import com.soundbox.common.MyService;
+import com.soundbox.common.SharedPreferenceManager;
 import com.soundbox.model.Song;
+import com.soundbox.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    FirebaseAuth auth;
-    private RelativeLayout layoutBottom;
-
-    LinearLayout layoutHome, layoutUpload, layoutUser, layoutClickToLogin, layoutUserTrue;
-
-    Button buttonTabHome, buttonTabUpload, buttonTabUser;
-    TextView textView;
-    FirebaseUser user;
     ProgressDialog progressDialog;
     ListView listView;
 
@@ -73,34 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     JcPlayerView jcPlayerView;
     List<JcAudio> jcAudios;
 
-    // upload Music
-    Uri uriSong, image;
-    byte[] bytes;
-    String fileName, songUrl, imageUrl;
-    String songLength;
-    FirebaseStorage storage;
-    StorageReference storageReference;
-    Boolean isLogin = false;
-    EditText selectSongNameEditText;
-    EditText artistName;
-    TextView textViewUserLoginTrue, textViewPassLoginTrue, textUser;
-    ImageView selectImage;
-    Button uploadButton;
-    ImageButton selectSong;
-    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-    //end
-
-    //Login - register
-    TextInputEditText editTextEmail, editTextPassword;
-    Button btnLogin;
-    FirebaseAuth mAuth;
-    ProgressBar progressBar;
-
-    Button btnReg;
-    //end
-
     //logout
-    Button logOutButton;
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -108,13 +77,16 @@ public class HomeActivity extends AppCompatActivity {
             if (bundle == null) {
                 return;
             }
-
             newMusic = (Song) bundle.get("object_music");
             isPlaying = bundle.getBoolean("status_player");
             int actionMusic = bundle.getInt("action_music");
-            handleLayoutMusic(actionMusic);
+//            handleLayoutMusic(actionMusic);
         }
     };
+
+    // new feature
+    private static final String STATE_PLAYER = "state_player";
+    private boolean isPlayerVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,12 +94,15 @@ public class HomeActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title not the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//int flag, int mask
-        setContentView(R.layout.activity_home);
-        bindNavigationBar();
 
+        setContentView(R.layout.activity_home);
+        bindViews();
+        // to~do Khôi phục trạng thái của jcPlayerView từ savedInstanceState
+        bindNavigationBar();
         loadMusicOncreate();
         clickMusicOncreate();
     }
+
 
     @SuppressLint("ResourceAsColor")
     private void loadMusicOncreate() {
@@ -137,16 +112,10 @@ public class HomeActivity extends AppCompatActivity {
         progressDialog.show();
         progressDialog.setMessage("Please Wait...");
 
-        jcPlayerView = findViewById(R.id.jcplayer);
-        imgMusic = findViewById(R.id.img_music);
-        imgPlayOrPause = findViewById(R.id.button_play_pause);
-        imgClear = findViewById(R.id.button_clear);
-        textViewTitleMusic = findViewById(R.id.text_view_title_music);
-        textViewSingleMusic = findViewById(R.id.text_view_single_music);
-        listView = findViewById(R.id.songsList);
         retrieveSongs();
     }
-    public void retrieveSongs() {
+
+    private void retrieveSongs() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Songs");
         databaseReference.addValueEventListener(new ValueEventListener() {
 
@@ -185,25 +154,27 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-    private void handleLayoutMusic(int action) {
-        switch (action) {
-            case MyService.ACTION_START:
-                layoutBottom.setVisibility(View.VISIBLE);
-                showInforMusic();
-                setStartusButtonPlayOrPause();
-                break;
-            case MyService.ACTION_PAUSE:
-                setStartusButtonPlayOrPause();
-                break;
-            case MyService.ACTION_RESUME:
-                setStartusButtonPlayOrPause();
-                break;
-            case MyService.ACTION_CLEAR:
-                layoutBottom.setVisibility(View.GONE);
-                break;
 
-        }
-    }
+//    private void handleLayoutMusic(int action) {
+//        switch (action) {
+//            case MyService.ACTION_START:
+//                layoutBottom.setVisibility(View.VISIBLE);
+//                showInforMusic();
+//                setStartusButtonPlayOrPause();
+//                break;
+//            case MyService.ACTION_PAUSE:
+//                setStartusButtonPlayOrPause();
+//                break;
+//            case MyService.ACTION_RESUME:
+//                setStartusButtonPlayOrPause();
+//                break;
+//            case MyService.ACTION_CLEAR:
+//                layoutBottom.setVisibility(View.GONE);
+//                break;
+//
+//        }
+//    }
+
     private void showInforMusic() {
         if (newMusic == null) {
             return;
@@ -230,6 +201,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
     private void setStartusButtonPlayOrPause() {
         if (isPlaying) {
             imgPlayOrPause.setImageResource(R.drawable.ic_pause_20);
@@ -237,6 +209,7 @@ public class HomeActivity extends AppCompatActivity {
             imgPlayOrPause.setImageResource(R.drawable.ic_play_20);
         }
     }
+
     private void sendActionToService(int action) {
         Intent intent = new Intent(this, MyService.class);
         intent.putExtra("action_music_service", action);
@@ -252,28 +225,50 @@ public class HomeActivity extends AppCompatActivity {
                 jcPlayerView.playAudio(jcAudios.get(i));
                 jcPlayerView.setVisibility(View.VISIBLE);
                 jcPlayerView.createNotification();
+                isPlayerVisible = true; // cập nhật trạng thái của jcPlayerView
                 adapter.notifyDataSetChanged();
             }
         });
     }
+
     private LinearLayout btn_toHome, btn_toUpload, btn_toProfile;
+
     private void bindNavigationBar() {
         btn_toHome = findViewById(R.id.btn_toHome);
         btn_toUpload = findViewById(R.id.btn_toUpload);
         btn_toProfile = findViewById(R.id.btn_toProfile);
 
         btn_toHome.setOnClickListener(v -> {
-            recreate();
+//            recreate();
         });
 
         btn_toUpload.setOnClickListener(v -> {
-            startActivity(new Intent(HomeActivity.this, UploadSongActivity.class));
-            finish();
+            if (SharedPreferenceManager.getInstance(getApplicationContext()).isLoggedIn()) {
+                startActivity(new Intent(HomeActivity.this, UploadSongActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Bạn cần đăng nhập để sử dụng chức năng này", Toast.LENGTH_SHORT).show();
+            }
         });
 
         btn_toProfile.setOnClickListener(v -> {
-            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
-            finish();
+            if (SharedPreferenceManager.getInstance(getApplicationContext()).isLoggedIn()) {
+                startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+                finish();
+            } else {
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                finish();
+            }
         });
+    }
+
+    private void bindViews() {
+        jcPlayerView = findViewById(R.id.jcplayer);
+        imgMusic = findViewById(R.id.img_music);
+        imgPlayOrPause = findViewById(R.id.button_play_pause);
+        imgClear = findViewById(R.id.button_clear);
+        textViewTitleMusic = findViewById(R.id.text_view_title_music);
+        textViewSingleMusic = findViewById(R.id.text_view_single_music);
+        listView = findViewById(R.id.songsList);
     }
 }

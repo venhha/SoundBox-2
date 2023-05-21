@@ -262,7 +262,7 @@ public class UploadSongActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         Log.i("database", "upload success");
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Song Uploaded to Database", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Tải nhạc lên thành công", Toast.LENGTH_SHORT).show();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -287,9 +287,9 @@ public class UploadSongActivity extends AppCompatActivity {
             finish();
         });
 
-        btn_toUpload.setOnClickListener(v -> {
-            recreate();
-        });
+//        btn_toUpload.setOnClickListener(v -> {
+//            recreate();
+//        });
 
         btn_toProfile.setOnClickListener(v -> {
             startActivity(new Intent(UploadSongActivity.this, ProfileActivity.class));
